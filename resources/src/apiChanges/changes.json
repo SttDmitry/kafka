@@ -1,0 +1,17 @@
+[
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/component/Listener",
+        "newClassName": "st/dmitry/component/Consumer"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/component/Consumer",
+        "newClassName": "st/dmitry/component/DefaultConsumer"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/component/Producer",
+        "newClassName": "st/dmitry/component/DefaultProducer"
+    }
+]
