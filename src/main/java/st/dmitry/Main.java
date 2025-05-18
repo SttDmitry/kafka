@@ -18,12 +18,12 @@ public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws InterruptedException {
-        KafkaFactory factory = FactoryManager.getFactory(FactoryManager.Type.STREAM);
+        KafkaFactory factory = FactoryManager.getFactory(FactoryManager.Type.DEFAULT);
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
 
         scheduleProducer(scheduler, factory);
-        scheduleConsumers(scheduler, factory, 1);
+        scheduleConsumers(scheduler, factory, 2);
 
         Thread.sleep(10000);
         scheduler.shutdown();

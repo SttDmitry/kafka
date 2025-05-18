@@ -22,15 +22,16 @@ public class DefaultConsumer implements Consumer {
 
     static {
         PROPERTIES.setProperty(ConsumerConfig.GROUP_ID_CONFIG, "kafka_group_id");
-        PROPERTIES.setProperty(ConsumerConfig.GROUP_PROTOCOL_CONFIG, "classic"); //consumer только с kafka 4.0.0
+        PROPERTIES.setProperty(ConsumerConfig.GROUP_PROTOCOL_CONFIG, "consumer"); //consumer только с kafka 4.0.0
         PROPERTIES.setProperty(ConsumerConfig.FETCH_MAX_BYTES_CONFIG, "512");
         PROPERTIES.setProperty(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, "1000");
-        PROPERTIES.setProperty(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, "3000");
-        PROPERTIES.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "45000");
         PROPERTIES.setProperty(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, "300000");
         PROPERTIES.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500");
         PROPERTIES.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-        PROPERTIES.setProperty(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.CooperativeStickyAssignor");
+        // Отключаем, если GROUP_PROTOCOL = 'consumer'
+//        PROPERTIES.setProperty(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, "3000");
+//        PROPERTIES.setProperty(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "45000");
+//        PROPERTIES.setProperty(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.CooperativeStickyAssignor");
         PROPERTIES.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         PROPERTIES.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
     }
