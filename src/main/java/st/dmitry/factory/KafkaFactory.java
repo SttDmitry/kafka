@@ -1,23 +1,38 @@
 package st.dmitry.factory;
 
-
-import st.dmitry.component.Consumer;
 import st.dmitry.component.Producer;
+import st.dmitry.component.impl.DefaultConsumer;
+import st.dmitry.component.impl.DefaultProducer;
+import st.dmitry.component.impl.StreamConsumer;
+import st.dmitry.schedule.ConsumerScheduleStrategy;
+import st.dmitry.schedule.ScheduledConsumer;
 
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.function.Function;
 
-public abstract class KafkaFactory {
+public class KafkaFactory {
 
-    protected String servers;
-    protected String topic;
+    private static final String SERVERS;
+    private static final String TOPIC;
 
-    {
+    static {
         Map<String, String> environment = System.getenv();
-        servers = environment.get("KAFKA_SERVERS");
-        topic = environment.get("KAFKA_TOPIC");
+        SERVERS = environment.get("KAFKA_SERVERS");
+        TOPIC = environment.get("KAFKA_TOPIC");
     }
 
-    public abstract Consumer createConsumer(int number);
+    public static Producer getProducer() {
+        return new DefaultProducer(SERVERS, TOPIC);
+    }
 
-    public abstract Producer createProducer();
+    public static void scheduleConsumer(ScheduledExecutorService scheduler, ConsumerScheduleStrategy strategy, int times)
+        throws InterruptedException {
+        ConsumerScheduleStrategy.Type type = strategy.type();
+        Function<Integer, ScheduledConsumer> consumerFunction = switch (type) {
+            case DEFAULT -> (number) -> new DefaultConsumer(SERVERS, TOPIC, number);
+            case STREAM -> (number) -> new StreamConsumer(SERVERS, TOPIC, number);
+        };
+        strategy.schedule(scheduler, consumerFunction, times);
+    }
 }

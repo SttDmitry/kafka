@@ -10,7 +10,7 @@ import org.apache.kafka.streams.kstream.KTable;
 import org.apache.kafka.streams.kstream.Produced;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import st.dmitry.component.Consumer;
+import st.dmitry.schedule.ScheduledConsumer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
 
-public class StreamConsumer implements Consumer {
+public class StreamConsumer implements ScheduledConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(StreamConsumer.class);
     private static final Properties PROPERTIES = new Properties();
@@ -58,10 +58,6 @@ public class StreamConsumer implements Consumer {
             throw new RuntimeException(e);
         }
         streams.close();
-    }
-
-    public void consume() {
-        //Messages consumed through Kafka Stream
     }
 
     private Path getTempDirectory() {

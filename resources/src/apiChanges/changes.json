@@ -13,5 +13,39 @@
         "type": "rename-class",
         "oldClassName": "st/dmitry/component/Producer",
         "newClassName": "st/dmitry/component/DefaultProducer"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/component/impl/FactoryManager$Type",
+        "newClassName": "st/dmitry/component/impl/FactoryManager$Strategy"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/factory/FactoryManager",
+        "newClassName": "st/dmitry/factory/KafkaFactory"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/schedule/ScheduleStrategy",
+        "newClassName": "st/dmitry/schedule/ConsumerScheduleStrategy"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/schedule/ConsumerScheduleStrategy$Strategy",
+        "newClassName": "st/dmitry/schedule/ConsumerScheduleStrategy$Type"
+    },
+    {
+        "type": "rename-class",
+        "oldClassName": "st/dmitry/schedule/impl/Default",
+        "newClassName": "st/dmitry/schedule/impl/DefaultScheduleStrategy"
+    },
+    {
+        "type": "rename-method",
+        "method": {
+            "className": "st/dmitry/factory/KafkaFactory",
+            "methodName": "getConsumer",
+            "methodSignature": "(Lst/dmitry/schedule/ConsumerScheduleStrategy;I)V"
+        },
+        "newName": "scheduleConsumer"
     }
 ]

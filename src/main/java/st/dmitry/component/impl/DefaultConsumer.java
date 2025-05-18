@@ -7,12 +7,13 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import st.dmitry.component.Consumer;
+import st.dmitry.schedule.ScheduledConsumer;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 
-public class DefaultConsumer implements Consumer {
+public class DefaultConsumer implements Consumer, ScheduledConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultConsumer.class);
     private static final Properties PROPERTIES = new Properties();
